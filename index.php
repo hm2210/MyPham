@@ -39,6 +39,8 @@
             include("login.php");
         }elseif ($request_uri == 'category') {
             include("category.php");
+        }elseif ($request_uri == 'detail-product') {
+            include("detail-product.php");
         } else {
             // Nếu không tìm thấy định tuyến
             // header("HTTP/1.0 404 Not Found");
@@ -47,6 +49,8 @@
     }else{
         include("home.php");
     }
+
+    include("footer.php");
     
     ?>
 

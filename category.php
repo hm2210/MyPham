@@ -37,8 +37,8 @@
                         <div class="select-label">SORT BY:</div>
                         <div class="select-wrapper select-wrapper-xxs">
                             <select id="sort" class="form-control input-sm">
-                                <option value="ASC" <?php if($_GET['sortType'] == "ASC"){ echo "selected";} ?>>Prices increase gradually</option>
-                                <option value="DESC" <?php if($_GET['sortType'] == "DESC"){ echo "selected";} ?>>Price descending</option>
+                                <option value="ASC" <?php if(isset($_GET['sortType']) && $_GET['sortType'] == "ASC"){ echo "selected";} ?>>Prices increase gradually</option>
+                                <option value="DESC" <?php if(isset($_GET['sortType']) && $_GET['sortType'] == "DESC"){ echo "selected";} ?>>Price descending</option>
                             </select>
                         </div>
                     </div>
@@ -53,15 +53,15 @@
                         <!-- -->
                         <div class="sidebar-block_content">
                             <form id="select-price" method="GET">
-                                <input type="radio" id="l10" name="price" value="<10" <?php if($_GET['price'] == "<10"){ echo "checked";} ?>>
+                                <input type="radio" id="l10" name="price" value="<10" <?php if(isset($_GET['price']) && $_GET['price'] == "<10"){ echo "checked";} ?>>
                                 <label for="l10">Less than $10</label><br>
-                                <input type="radio" id="l30" name="price" value="<30" <?php if($_GET['price'] == "<30"){ echo "checked";} ?>>
+                                <input type="radio" id="l30" name="price" value="<30" <?php if(isset($_GET['price']) && $_GET['price'] == "<30"){ echo "checked";} ?>>
                                 <label for="l30">Less than $30</label><br>
-                                <input type="radio" id="l50" name="price" value="<50" <?php if($_GET['price'] == "<50"){ echo "checked";} ?>>
+                                <input type="radio" id="l50" name="price" value="<50" <?php if(isset($_GET['price']) && $_GET['price'] == "<50"){ echo "checked";} ?>>
                                 <label for="l50">Less than $50</label><br>
-                                <input type="radio" id="l100" name="price" value="<100" <?php if($_GET['price'] == "<100"){ echo "checked";} ?>>
+                                <input type="radio" id="l100" name="price" value="<100" <?php if(isset($_GET['price']) && $_GET['price'] == "<100"){ echo "checked";} ?>>
                                 <label for="l100">Less than $100</label><br>
-                                <input type="radio" id="m100" name="price" value=">100" <?php if($_GET['price'] == ">100"){ echo "checked";} ?>>
+                                <input type="radio" id="m100" name="price" value=">100" <?php if(isset($_GET['price']) && $_GET['price'] == ">100"){ echo "checked";} ?>>
                                 <label for="m100">More than $100</label>
                             </form>
                         </div>
@@ -103,7 +103,7 @@
                                     <div class="prd prd--style2 prd-labels--max prd-labels-shadow ">
                                         <div class="prd-inside">
                                             <div class="prd-img-area">
-                                                <a href="product.html" class="prd-img image-hover-scale image-container">
+                                                <a href=<?php echo "?request_uri=detail-product&productId=" . $product['product_id'] ?> class="prd-img image-hover-scale image-container">
                                                     <img src="<?php echo $product['image'] ?>"
                                                         class="js-prd-img lazyload fade-up">
                                                     <div class="foxic-loader"></div>
@@ -123,7 +123,7 @@
                                             </div>
                                             <div class="prd-info">
                                                 <div class="prd-info-wrap">
-                                                    <h2 class="prd-title"><a href="product.html">
+                                                    <h2 class="prd-title"><a href=<?php echo "?request_uri=detail-product&productId=" . $product['product_id'] ?>>
                                                             <?php echo $product['product_name'] ?>
                                                         </a></h2>
                                                     <div class="prd-action">
@@ -166,30 +166,11 @@
                                     </div>
 
                                 <?php }
-                            } ?>
-                        </div>
-                        <div class="loader-horizontal-sm js-loader-horizontal-sm d-none" data-loader-horizontal
-                            style="opacity: 0;"><span></span></div>
-                        <div class="circle-loader-wrap">
-                            <div class="circle-loader">
-                                <a href="ajax/ajax-product-category.json" data-total="30" data-loaded="12" data-load="6"
-                                    class="lazyload js-circle-loader">
-                                    <svg id="svg_d" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="50%" cy="50%" r="63" fill="transparent"></circle>
-                                        <circle class="js-circle-bar" cx="50%" cy="50%" r="63" fill="transparent">
-                                        </circle>
-                                    </svg>
-                                    <svg id="svg_m" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="50%" cy="50%" r="50" fill="transparent"></circle>
-                                        <circle class="js-circle-bar" cx="50%" cy="50%" r="50" fill="transparent">
-                                        </circle>
-                                    </svg>
-                                    <div class="circle-loader-text">Load More</div>
-                                    <div class="circle-loader-text-alt"><span
-                                            class="js-circle-loader-start"></span>&nbsp;out of&nbsp;<span
-                                            class="js-circle-loader-end"></span></div>
-                                </a>
-                            </div>
+                                }
+                                if($resultProduct == null || $resultProduct->num_rows == 0){
+                                    echo "<div class='text-title text-center w-100 mt-5'><h4>No product found</h4></div>";
+                                } ?>
+                                
                         </div>
                     </div>
                 </div>
