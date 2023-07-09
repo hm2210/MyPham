@@ -122,8 +122,8 @@
                         
                             <?php
                                 $queryProductSuggetst= "SELECT DISTINCT * FROM product ORDER BY RAND() LIMIT 4";
-                                $resultProductsuggest = mysqli_query($conn, $queryProductSuggetst);
-                                while ($product = $resultProductsuggest->fetch_assoc()) {
+                                $resultProductSuggest = mysqli_query($conn, $queryProductSuggetst);
+                                while ($product = $resultProductSuggest->fetch_assoc()) {
                                     ?>
                                     <div class="prd prd--style2 prd-labels--max prd-labels-shadow ">
                                         <div class="prd-inside">
