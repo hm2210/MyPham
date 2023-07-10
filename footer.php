@@ -43,8 +43,7 @@
                         <div class="footer-block">
                             <div class="footer-logo">
                                 <a href="index.html"><img class="lazyload fade-up"
-                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                        data-srcset="images/logo-footer.webp 1x, images/logo-footer2x.webp 2x"
+                                        src="images/cosmetic-logo-header.png"
                                         alt="Logo"></a>
                             </div>
                             <div class="collapsed-content">
@@ -128,12 +127,12 @@
                                     <li><i class="icon-apple-pay-logo"></i></li>
                                 </ul>
                             </div>
-                            <div class="d-none d-lg-block">
+                            <!-- <div class="d-none d-lg-block">
                                 <div class="box-coupon">
                                     <div class="box-coupon-icon"><i class="icon-scissors"></i></div>
                                     <div class="box-coupon-text"><span class="custom-color">FOXIC</span> THEME</div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -142,7 +141,7 @@
         <div class="footer-bottom footer-bottom--bg">
             <div class="container">
                 <div class="footer-copyright text-center">
-                    <a href="#">FOXshop</a> ©2020 copyright
+                    <a href="#">Cosmetic</a> ©2023 copyright
                 </div>
             </div>
         </div>

@@ -37,7 +37,7 @@
                                         class="dropdn-link-txt">Account</span></a>
                             </div> -->
                         <div class="dropdn dropdn_fullheight minicart">
-                            <a href="#" class="dropdn-link js-dropdn-link minicart-link only-icon"
+                            <a href="/?request_uri=cart" class="dropdn-link js-dropdn-link minicart-link only-icon"
                                 data-panel="#dropdnMinicart">
                                 <i class="icon-basket"></i>
                                 <span class="minicart-qty">3</span>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                     <div class="col-auto hdr-logo" style="width:200px">
-                        <a href="/MyPham/?request_uri=" class="logo"><img srcset="images/cosmetic-logo-header.png"
+                        <a href="?request_uri=" class="logo"><img srcset="images/cosmetic-logo-header.png"
                                 alt="Logo"></a>
                     </div>
                     <div class="hdr-nav hide-mobile nav-holder justify-content-center px-4">
@@ -132,7 +132,7 @@
                                             $resultCategory = mysqli_query($conn, $sqlGetLstCategory);
                                             // $lstCategory = mysqli_fetch_array($resultCategory);
                                             while ($row = $resultCategory->fetch_assoc()) {
-                                                echo "<li><a href='/MyPham/?request_uri=category&id=" . $row["category_id"] ."'>" . $row["category_name"] . "</a></li>";
+                                                echo "<li><a href='?request_uri=category&id=" . $row["category_id"] ."'>" . $row["category_name"] . "</a></li>";
                                             }
                                             
                                         ?>
@@ -178,7 +178,7 @@
                                     </div>
                                 </div> -->
                             <div class="dropdn dropdn_fullheight minicart">
-                                <a href="#" class="dropdn-link js-dropdn-link minicart-link"
+                                <a href="?request_uri=cart" class="dropdn-link js-dropdn-link minicart-link"
                                     data-panel="#dropdnMinicart">
                                     <i class="icon-basket"></i>
                                     <span class="minicart-qty">3</span>

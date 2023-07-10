@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    include("connect.php")
+session_start();
+include("connect.php")
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,60 +27,117 @@
 
 <body class="has-smround-btns has-loader-bg equal-height">
     <?php
-    function addToCart($productId, $quantity){
-        if(isset($_SESSION['userId'])){
+    function addToCart($productId, $quantity, $conn)
+    {
+        $userId = $_SESSION['userId'];
+        echo "ud" . $userId;
 
-        }else{
-    ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script>
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'You must be login to continue!',
-                    showConfirmButton: true,
-                    confirmButtonText: 'OK'
-                }).then((result)=>{
-                    if (result.isConfirmed) {
-                        window.location.replace('/MyPham/?request_uri=login');
-                    }
-                })
-            </script>
-    <?php
+        $sqlCheckExisting = "SELECT * FROM shopping_cart WHERE product_id = " . $productId . " AND user_id = " . $userId;
+        echo $sqlCheckExisting;
+        $resultCheck = mysqli_query($conn, $sqlCheckExisting);
+        $exist = $resultCheck->fetch_assoc();
+        if ($exist != null) {
+            $newQuantity = $exist["quantity"] + $quantity;
+            $sqlUpdateQuantity = "UPDATE shopping_cart SET quantity = " . $newQuantity . " WHERE product_id = " . $productId . " AND user_id = " . $userId;
+
+            $resultUpdate = mysqli_query($conn, $sqlUpdateQuantity);
+        } else {
+            $sql = "INSERT INTO shopping_cart(user_id, product_id, quantity) VALUES($userId, $productId, $quantity)";
+            $result = mysqli_query($conn, $sql);
         }
+
     }
     echo "<script>if ( window.history.replaceState ) { window.history.replaceState( null, null, window.location.href ); }</script>";
 
     include("header.php");
     // include("login.php");
-    if(isset($_GET['request_uri'])){
+    if (isset($_GET['request_uri'])) {
         $request_uri = $_GET['request_uri'];
-        echo $request_uri;
         // Kiểm tra URL và xử lý yêu cầu
         if ($request_uri == '/' || $request_uri == '') {
             include("home.php");
         } elseif ($request_uri == 'login') {
             include("login.php");
-        }elseif ($request_uri == 'category') {
+        } elseif ($request_uri == 'category') {
             include("category.php");
-        }elseif ($request_uri == 'detail-product') {
+        } elseif ($request_uri == 'detail-product') {
             include("detail-product.php");
+        } elseif ($request_uri == 'register') {
+            include("register.php");
+        } elseif ($request_uri == 'cart') {
+            if (!isset($_SESSION["userId"])) {
+                ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script>
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'You must be login to continue!',
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.replace('?request_uri=login');
+                        }
+                    })
+                </script>
+                <?php
+            } else {
+                include("shopping-cart.php");
+            }
+
         } else {
             // Nếu không tìm thấy định tuyến
             // header("HTTP/1.0 404 Not Found");
             echo "Page not found";
         }
-    }else{
+    } else {
         include("home.php");
     }
 
     include("footer.php");
-    
+
     ?>
-<!-- ================================ -->
-    <?php 
-        if(isset($_POST['productId']) && isset($_POST['quantity'])){
-            addToCart($productId, $quantity);
+    <!-- ================================ -->
+    <?php
+    if (isset($_POST['productId']) && isset($_POST['quantity'])) {
+        $productId = $_POST['productId'];
+        $quantity = $_POST['quantity'];
+        // echo $_SESSION['userId'];
+        if ($_SESSION['userId'] != null || $_SESSION['userId'] != '') {
+            addToCart($productId, $quantity, $conn);
+            $numRows = mysqli_affected_rows($conn);
+            if ($numRows > 0) {
+                ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Add product to cart successfully!',
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK'
+                    })
+                </script>
+                <?php
+            }
+        } else {
+            ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'You must be login to continue!',
+                showConfirmButton: true,
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.replace('?request_uri=login');
+                }
+            })
+        </script>
+    <?php
         }
+
+    }
     ?>
 
 

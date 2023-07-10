@@ -91,6 +91,7 @@
                         <div class="order-0 order-md-100">
                             <form method="post" action="#">
                                 <div class="prd-block_actions prd-block_actions--wishlist">
+                                <input style="display: none;" type="text" name="productId" value="<?php echo $product['product_id'] ?>" />
                                     <div class="prd-block_qty">
                                         <div class="qty qty-changer">
                                             <button class="decrease js-qty-button"></button>
@@ -100,9 +101,7 @@
                                         </div>
                                     </div>
                                     <div class="btn-wrap">
-                                        <button class="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart"
-                                            data-product='{"name":  "Leather Pegged Pants ",  "url ": "product.html",  "path ": "images/skins/fashion/product-page/product-01.webp",  "aspect_ratio ": "0.78"}'>Add
-                                            to cart</button>
+                                        <input class="btn btn--add-to-cart" type="submit" value="Add To Cart"></input>
                                     </div>
                                 </div>
                             </form>
@@ -222,8 +221,10 @@
                                 <div class="prd-info-wrap">
                                     <h2 class="prd-title"><a href="<?php echo "?request_uri=detail-product&productId=" . $suggestProduct['product_id'] ?>"><?php echo $suggestProduct['product_name'] ?></a></h2>
                                     <div class="prd-action">
-                                        <form action="#">
-                                            <button class="btn">Add To Cart</button>
+                                        <form method="POST">
+                                            <input style="display: none;" type="text" name="productId" value="<?php echo $product['product_id'] ?>" />
+                                            <input style="display: none;" type="text" name="quantity" value="1" />
+                                            <input class="btn" type="submit" value="Add To Cart"></input>
                                         </form>
                                     </div>
                                 </div>
@@ -233,8 +234,10 @@
                                     </div>
                                     <div class="prd-action">
                                         <div class="prd-action-left">
-                                            <form action="#">
-                                                <button class="btn">Add To Cart</button>
+                                            <form method="POST">
+                                                <input style="display: none;" type="text" name="productId" value="<?php echo $product['product_id'] ?>" />
+                                                <input style="display: none;" type="text" name="quantity" value="1" />
+                                                <input class="btn" type="submit" value="Add To Cart"></input>
                                             </form>
                                         </div>
                                     </div>
