@@ -73,8 +73,10 @@
                                                         </a>
                                                     </h2>
                                                     <div class="prd-action">
-                                                        <form action="#">
-                                                            <button class="btn js-prd-addtocart">Add To Cart</button>
+                                                        <form method="POST">
+                                                            <input style="display: none;" type="text" name="productId" value="<?php echo $product['product_id'] ?>" />
+                                                            <input style="display: none;" type="text" name="quantity" value="1" />
+                                                            <input class="btn" type="submit" value="Add To Cart"></input>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -98,8 +100,10 @@
                                                     </div>
                                                     <div class="prd-action">
                                                         <div class="prd-action-left">
-                                                            <form action="#">
-                                                                <button class="btn js-prd-addtocart">Add To Cart</button>
+                                                            <form method="POST">
+                                                                <input style="display: none;" type="text" name="productId" value="<?php echo $product['product_id'] ?>" />
+                                                                <input style="display: none;" type="text" name="quantity" value="1" />
+                                                                <input class="btn" type="submit" value="Add To Cart"></input>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -173,14 +177,14 @@
                                                     </div>
                                                     <div class="prd-price">
                                                         <!-- <div class="price-old">$ 200</div> -->
-                                                        <div class="price-new"><?php echo $product["price"] ?></div>
+                                                        <div class="price-new">$ <?php echo $product["price"] ?></div>
                                                     </div>
                                                     <div class="prd-action">
                                                         <div class="prd-action-left">
-                                                            <form action="#">
-                                                                <button class="btn js-prd-addtocart"
-                                                                    data-product='{"name": "Oversized Cotton Blouse", "path":"images/skins/fashion/products/product-03-1.webp", "url":"product.html", "aspect_ratio":0.778}'>Add
-                                                                    To Cart</button>
+                                                            <form method="POST">
+                                                                <input style="display: none;" type="text" name="productId" value="<?php echo $product['product_id'] ?>" />
+                                                                <input style="display: none;" type="text" name="quantity" value="1" />
+                                                                <input class="btn" type="submit" value="Add To Cart"></input>
                                                             </form>
                                                         </div>
                                                     </div>

@@ -27,6 +27,29 @@
 
 <body class="has-smround-btns has-loader-bg equal-height">
     <?php
+    function addToCart($productId, $quantity){
+        if(isset($_SESSION['userId'])){
+
+        }else{
+    ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'You must be login to continue!',
+                    showConfirmButton: true,
+                    confirmButtonText: 'OK'
+                }).then((result)=>{
+                    if (result.isConfirmed) {
+                        window.location.replace('/MyPham/?request_uri=login');
+                    }
+                })
+            </script>
+    <?php
+        }
+    }
+    echo "<script>if ( window.history.replaceState ) { window.history.replaceState( null, null, window.location.href ); }</script>";
+
     include("header.php");
     // include("login.php");
     if(isset($_GET['request_uri'])){
@@ -52,6 +75,12 @@
 
     include("footer.php");
     
+    ?>
+<!-- ================================ -->
+    <?php 
+        if(isset($_POST['productId']) && isset($_POST['quantity'])){
+            addToCart($productId, $quantity);
+        }
     ?>
 
 

@@ -33,12 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Truy vấn kiểm tra thông tin đăng nhập
         $sql = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
         $result = mysqli_query($conn, $sql);
-
+        $user = $result->fetch_assoc();
         if ($result->num_rows == 1) {
             // Đăng nhập thành công
             echo "Login successful. Welcome, $email!";
 
-            $_SESSION['user'] = $email;
+            $_SESSION['userId'] = $user["user_id"];
             
             echo "<script>window.location.href = 'http://localhost/MyPham/'</script>";
         } else {
