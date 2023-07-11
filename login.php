@@ -17,6 +17,9 @@
                             <button type="submit" class="btn">Login</button>
                         </div>
                     </form>
+                    <div class="text-center">
+                        Don't have account? <a class="text-info" href='?request_uri=register'>Register</a> now
+                    </div>
                 </div>
             </div>
         </div>

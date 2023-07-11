@@ -19,8 +19,8 @@
                                         class="icon-search"></i><span class="dropdn-link-txt">Search</span></a>
                                 <div class="dropdn-content">
                                     <div class="container">
-                                        <form method="get" action="#" class="search search-off-popular">
-                                            <input name="search" type="text" class="search-input input-empty"
+                                        <form method="GET" class="search search-off-popular">
+                                            <input name="keySearch" type="text" class="search-input input-empty"
                                                 placeholder="What are you looking for?">
                                             <button type="submit" class="search-button"><i
                                                     class="icon-search"></i></button>
@@ -37,11 +37,11 @@
                                         class="dropdn-link-txt">Account</span></a>
                             </div> -->
                         <div class="dropdn dropdn_fullheight minicart">
-                            <a href="/?request_uri=cart" class="dropdn-link js-dropdn-link minicart-link only-icon"
+                            <a onClick="gotoCart()" class="dropdn-link js-dropdn-link minicart-link only-icon"
                                 data-panel="#dropdnMinicart">
                                 <i class="icon-basket"></i>
-                                <span class="minicart-qty">3</span>
-                                <span class="minicart-total hide-mobile">$34.99</span>
+                                <!-- <span class="minicart-qty">3</span>
+                                <span class="minicart-total hide-mobile">$34.99</span> -->
                             </a>
                         </div>
                     </div>
@@ -98,8 +98,13 @@
                                             class="dropdn-link-txt ">Account</span></a>
                                     <div class="dropdn-content">
                                         <ul>
-                                            <li><a href="#"><img src="images/flags/sp.html" alt="">Login</a></li>
-                                            <li><a href="#"><img src="images/flags/de.html" alt="">Logout</a></li>
+                                            <?php 
+                                                if(isset($_SESSION['userId'])){
+                                                    echo '<li><a id="logout">Logout</a></li>';
+                                                }else{
+                                                    echo '<li><a id="login-btn-header" onClick="login()">Login</a></li>';
+                                                }
+                                            ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -122,7 +127,7 @@
                     </div>
                     <div class="hdr-nav hide-mobile nav-holder justify-content-center px-4">
                         <ul class="mmenu mmenu-js">
-                            <li class="mmenu-item--simple"><a href="#" class="active">Home</a>
+                            <li class="mmenu-item--simple"><a href="#">Home</a>
                             </li>
                             <li class="mmenu-item--simple"><a href="#">Product Category</a>
                                 <div class="mmenu-submenu">
@@ -140,8 +145,8 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="mmenu-item--simple"><a href="#" class="active">News</a>
-                            <li class="mmenu-item--simple"><a href="#" class="active">About us</a>
+                            <li class="mmenu-item--simple"><a href="#">News</a>
+                            <li class="mmenu-item--simple"><a href="#">About us</a>
 
                         </ul>
                     </div>
@@ -153,8 +158,8 @@
                                             class="icon-search"></i><span class="dropdn-link-txt">Search</span></a>
                                     <div class="dropdn-content">
                                         <div class="container">
-                                            <form method="get" action="#" class="search search-off-popular">
-                                                <input name="search" type="text" class="search-input input-empty"
+                                            <form method="GET" class="search search-off-popular">
+                                                <input name="keySearch" type="text" class="search-input input-empty"
                                                     placeholder="What are you looking for?">
                                                 <button type="submit" class="search-button"><i
                                                         class="icon-search"></i></button>
@@ -178,11 +183,11 @@
                                     </div>
                                 </div> -->
                             <div class="dropdn dropdn_fullheight minicart">
-                                <a href="?request_uri=cart" class="dropdn-link js-dropdn-link minicart-link"
+                                <a onClick="gotoCart()" class="dropdn-link js-dropdn-link minicart-link"
                                     data-panel="#dropdnMinicart">
                                     <i class="icon-basket"></i>
-                                    <span class="minicart-qty">3</span>
-                                    <span class="minicart-total hide-mobile">$34.99</span>
+                                    <!-- <span class="minicart-qty">3</span>
+                                    <span class="minicart-total hide-mobile">$34.99</span> -->
                                 </a>
                             </div>
                         </div>
@@ -193,6 +198,18 @@
     </div>
 </header>
 
-<?php
+<script>
+    function login(){
+        window.location.replace("?request_uri=login");
+    }
+    document.getElementById("logout").addEventListener("click", function (event) {
+        <?php
+            $_SESSION['userId'] = null;
+        ?>
+        login();
+    } );
 
-?>
+    function gotoCart(){
+            window.location.replace("?request_uri=cart");
+        }
+</script>

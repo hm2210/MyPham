@@ -30,10 +30,8 @@ include("connect.php")
     function addToCart($productId, $quantity, $conn)
     {
         $userId = $_SESSION['userId'];
-        echo "ud" . $userId;
 
         $sqlCheckExisting = "SELECT * FROM shopping_cart WHERE product_id = " . $productId . " AND user_id = " . $userId;
-        echo $sqlCheckExisting;
         $resultCheck = mysqli_query($conn, $sqlCheckExisting);
         $exist = $resultCheck->fetch_assoc();
         if ($exist != null) {
@@ -51,48 +49,54 @@ include("connect.php")
 
     include("header.php");
     // include("login.php");
-    if (isset($_GET['request_uri'])) {
-        $request_uri = $_GET['request_uri'];
-        // Kiểm tra URL và xử lý yêu cầu
-        if ($request_uri == '/' || $request_uri == '') {
-            include("home.php");
-        } elseif ($request_uri == 'login') {
-            include("login.php");
-        } elseif ($request_uri == 'category') {
-            include("category.php");
-        } elseif ($request_uri == 'detail-product') {
-            include("detail-product.php");
-        } elseif ($request_uri == 'register') {
-            include("register.php");
-        } elseif ($request_uri == 'cart') {
-            if (!isset($_SESSION["userId"])) {
-                ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script>
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'You must be login to continue!',
-                        showConfirmButton: true,
-                        confirmButtonText: 'OK'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.replace('?request_uri=login');
-                        }
-                    })
-                </script>
-                <?php
-            } else {
-                include("shopping-cart.php");
+    if(isset($_GET['keySearch'])){
+        include("search-result.php");
+    }else{
+        if (isset($_GET['request_uri'])) {
+            $request_uri = $_GET['request_uri'];
+            // Kiểm tra URL và xử lý yêu cầu
+            if ($request_uri == '/' || $request_uri == '') {
+                include("home.php");
+            } elseif ($request_uri == 'login') {
+                include("login.php");
+            } elseif ($request_uri == 'category') {
+                include("category.php");
+            } elseif ($request_uri == 'detail-product') {
+                include("detail-product.php");
+            } elseif ($request_uri == 'register') {
+                include("register.php");
             }
-
+            elseif ($request_uri == 'cart') {
+                if (!isset($_SESSION["userId"])) {
+                    ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'You must be login to continue!',
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.replace('?request_uri=login');
+                            }
+                        })
+                    </script>
+                    <?php
+                } else {
+                    include("shopping-cart.php");
+                }
+    
+            } else {
+                // Nếu không tìm thấy định tuyến
+                // header("HTTP/1.0 404 Not Found");
+                echo "Page not found";
+            }
         } else {
-            // Nếu không tìm thấy định tuyến
-            // header("HTTP/1.0 404 Not Found");
-            echo "Page not found";
+            include("home.php");
         }
-    } else {
-        include("home.php");
     }
+
 
     include("footer.php");
 
