@@ -6,16 +6,20 @@
         WHERE user_id = '$userId'";
     $lstItem = mysqli_query($conn, $sql);
 
+   
 ?>
 <div class="page-content">
     <div class="holder breadcrumbs-wrap mt-0">
         <div class="container">
             <ul class="breadcrumbs">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Home</a></li>
                 <li><span>Cart</span></li>
             </ul>
         </div>
     </div>
+    <?php 
+        if($lstItem->num_rows > 0){
+    ?>
     <div class="holder">
         <div class="container">
             <div class="page-title text-center">
@@ -91,4 +95,20 @@
             </div>
         </div>
     </div>
+    <?php 
+        }else{
+    ?>
+        	<div class="holder mt-0">
+                <div class="container">
+                    <div class="page404-bg">
+                        <div class="page404-text">
+                            <div class="txt1"><img src="images/pages/tumbleweed.gif" alt=""></div>
+                            <div class="txt2">Your shopping cart is empty!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <?php
+        }
+    ?>
 </div>

@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Đăng nhập thành công
             $_SESSION['userId'] = $user["user_id"];
             
-            echo "<script>window.location.href = 'http://localhost/MyPham/'</script>";
+            echo "<script>window.location.replace('?request_uri=')</script>";
         } else {
             // Đăng nhập thất bại
             ?>
