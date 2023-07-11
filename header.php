@@ -1,3 +1,4 @@
+
 <header class="hdr-wrap">
     <div class="hdr-content hdr-content-sticky">
         <div class="container">
@@ -100,9 +101,9 @@
                                         <ul>
                                             <?php 
                                                 if(isset($_SESSION['userId'])){
-                                                    echo '<li><a id="logout">Logout</a></li>';
+                                                    echo '<li><a href="?account=logout" id="logout">Logout</a></li>';
                                                 }else{
-                                                    echo '<li><a id="login-btn-header" onClick="login()">Login</a></li>';
+                                                    echo '<li><a href="?account=login id="login-btn-header">Login</a></li>';
                                                 }
                                             ?>
                                         </ul>
@@ -197,18 +198,16 @@
         </div>
     </div>
 </header>
+<?php
+    if(isset($_GET['account'])){
+        if($_GET['account'] == 'logout'){
+            $_SESSION['userId'] = null;
+        }
+        echo '<script>window.location.replace("?request_uri=login");</script>';
+    }
+?>
 
 <script>
-    function login(){
-        window.location.replace("?request_uri=login");
-    }
-    document.getElementById("logout").addEventListener("click", function (event) {
-        <?php
-            $_SESSION['userId'] = null;
-        ?>
-        login();
-    } );
-
     function gotoCart(){
             window.location.replace("?request_uri=cart");
         }

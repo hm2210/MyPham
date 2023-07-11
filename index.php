@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("connect.php")
-    ?>
+include("connect.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,7 +67,8 @@ include("connect.php")
                 include("register.php");
             }
             elseif ($request_uri == 'cart') {
-                if (!isset($_SESSION["userId"])) {
+                
+                if ($_SESSION["userId"] == null) {
                     ?>
                     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                     <script>

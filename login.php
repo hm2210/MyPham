@@ -39,8 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
         if ($result->num_rows == 1) {
             // Đăng nhập thành công
-            echo "Login successful. Welcome, $email!";
-
             $_SESSION['userId'] = $user["user_id"];
             
             echo "<script>window.location.href = 'http://localhost/MyPham/'</script>";
